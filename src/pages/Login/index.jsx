@@ -1,11 +1,12 @@
+import { notification } from "antd";
 import React, { useState } from "react";
-import "./login.css";
-import { Link, useNavigate } from "react-router-dom";
-import Button from "../../components/shared/Button";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { actUserLoginAsync } from "../../store/user/action";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "../../components/shared/Button";
 import Input from "../../components/shared/Input";
+import { actUserLoginAsync } from "../../store/user/action";
+import "./login.css";
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -24,12 +25,27 @@ function LoginPage() {
   // console.log("Object.values(errors)", Object.values(errors));
   // console.log("Object.keys(errors)", Object.keys(errors));
 
+  // Thông báo
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = () => {
+    api.success({
+      message: `Đăng nhập thành công`,
+    });
+  };
+  const openNotificationError = () => {
+    api.error({
+      message: `Đăng nhập thất bại`,
+    });
+  };
+
   function onSubmit(data) {
     dispatch(actUserLoginAsync(data)).then((res) => {
       if (res.ok) {
-        navigate("/");
+        // navigate("/");
+        openNotification();
       } else {
-        setFormData("Thông tin đăng nhập không đúng, xin vui lòng nhập lại!");
+        // setFormData("Thông tin đăng nhập không đúng, xin vui lòng nhập lại!");
+        openNotificationError();
       }
     });
   }
@@ -95,6 +111,7 @@ function LoginPage() {
         </div>
       </div>
       <div className="spacing" />
+      {contextHolder}
     </main>
   );
 }

@@ -7,6 +7,7 @@ import * as yup from "yup";
 import Button from "../components/shared/Button";
 import Input from "../components/shared/Input";
 import { actUserChangePasswordAsync } from "../store/user/action";
+import { notification } from "antd";
 
 const schema = yup
   .object({
@@ -29,13 +30,28 @@ function ChangePasswordPage() {
   const { errors } = formState;
   // console.log(errors);
 
+  // Thông báo
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = () => {
+    api.success({
+      message: `Thay đổi mật khẩu thành công`,
+    });
+  };
+  const openNotificationError = () => {
+    api.error({
+      message: `Thay đổi mật khẩu thất bại`,
+    });
+  };
+
   function onSubmit(data) {
     console.log(data);
     dispatch(actUserChangePasswordAsync(data)).then((res) => {
       if (res.ok) {
-        navigate("/");
+        // navigate("/");
+        openNotification();
       } else {
-        setFormData("Cập nhập mật khẩu thất bại!");
+        // setFormData("Cập nhập mật khẩu thất bại!");
+        openNotificationError();
       }
     });
   }
@@ -81,6 +97,7 @@ function ChangePasswordPage() {
         </div>
       </div>
       <div className="spacing" />
+      {contextHolder}
     </main>
   );
 }

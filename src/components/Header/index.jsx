@@ -1,7 +1,7 @@
-import './header.css';
-import HeaderLogo from './HeaderLogo';
-import HeaderMenus from './HeaderMenus';
-import HeaderSearch from './HeaderSearch';
+import "./header.css";
+import HeaderLogo from "./HeaderLogo";
+import HeaderMenus from "./HeaderMenus";
+import HeaderSearch from "./HeaderSearch";
 
 function Header() {
   return (

@@ -8,6 +8,7 @@ import Input from "../components/shared/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { actUserRegisterAsync } from "../store/user/action";
+import { notification } from "antd";
 
 const schema = yup
   .object({
@@ -30,12 +31,27 @@ function RegisterPage(props) {
   const { errors } = formState;
   console.log(errors);
 
+  // Thông báo
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = () => {
+    api.success({
+      message: `Thay đổi mật khẩu thành công`,
+    });
+  };
+  const openNotificationError = (values) => {
+    api.error({
+      message: values,
+    });
+  };
+
   function onSubmit(data) {
     dispatch(actUserRegisterAsync(data)).then((res) => {
       if (res.ok) {
-        navigate("/");
+        // navigate("/");
+        openNotification();
       } else {
-        setFormData(res.message);
+        // setFormData(res.message);
+        openNotificationError(res.message);
       }
     });
   }
@@ -84,6 +100,7 @@ function RegisterPage(props) {
         </div>
       </div>
       <div className="spacing" />
+      {contextHolder}
     </main>
   );
 }

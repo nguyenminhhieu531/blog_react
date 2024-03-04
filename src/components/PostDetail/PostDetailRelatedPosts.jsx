@@ -7,7 +7,7 @@ function PostDetailRelatedPosts({ data }) {
   }
 
   const posts = useSelector((state) => state.POST.postsAll);
-  console.log(posts);
+  // console.log(posts);
 
   let fetchPosts = posts.map((item, index) => {
     return <ArticleRelated key={index} data={item} />;

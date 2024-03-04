@@ -22,6 +22,17 @@ const userService = {
       },
     });
   },
+  updateProfile(data) {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    return API.put("/wp/v2/users/me", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+  getComment(data) {
+    return API.get("/wp/v2/comments?per_page=3&page=1&post=12&parent=0&order=asc&exclude=2,5", data);
+  },
 };
 
 export default userService;

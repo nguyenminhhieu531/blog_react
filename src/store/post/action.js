@@ -1,6 +1,7 @@
 import { mappingCategoryData, mappingPostData } from "../../helpers";
 import categoryService from "../../services/categoryService";
 import postService from "../../services/postService";
+import { actPagingCommentAsync, actParentCommentAsync } from "../comment/action";
 
 // ACTION TYPE
 export const ACT_POSTS_LATEST = "ACT_POSTS_LATEST";
@@ -132,7 +133,6 @@ export function actPostsPagingAsync(params = { page: 1 }) {
 export function actPostsCategoryAsync(slug, page = 1) {
   return async (dispatch) => {
     const res = await categoryService.getDetail(slug);
-    // console.log(res);
     console.log(res.data[0].id);
 
     const resByCategory = await postService.getByCategory(res.data[0].id, page);
@@ -148,7 +148,9 @@ export function actPostsDetailAsync(slug) {
   return async (dispatch) => {
     const res = await postService.getDetail(slug);
     const data = res.data[0];
+
     dispatch(actPostsDetail(data));
+    dispatch(actPagingCommentAsync({ post: data.id, page: 1 }));
   };
 }
 

@@ -7,22 +7,10 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    // case ACT_USER_LOGIN: {
-    //   return {
-    //     ...state,
-    //     // token: action.payload,
-    //     token: action.payload.token,
-    //     currenUser: action.payload.currenUser,
-    //     // ...action.payload,
-    //   };
-    // }
     case ACT_USER_FETCH_ME: {
       return {
         ...state,
-        // token: action.payload,
-        token: action.payload.token,
-        currenUser: action.payload.currenUser,
-        // ...action.payload,
+        ...action.payload,
       };
     }
     case ACT_USER_LOGOUT:

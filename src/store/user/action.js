@@ -1,3 +1,4 @@
+import mediaService from "../../services/mediaService";
 import userService from "../../services/userService";
 
 // ACTION TYPE
@@ -112,6 +113,46 @@ export function actUserFetchMeAsync(token) {
       dispatch(actUserFetchMe({ currenUser, token }));
     } catch (error) {
       dispatch(actUserLogout());
+    }
+  };
+}
+
+// export function actUserUpdateProfileAsync(data) {
+//   return async (dispatch) => {
+//     try {
+//       const res = await userService.updateProfile(data);
+//       console.log(res);
+//       return {
+//         ok: true,
+//       };
+//     } catch (error) {
+//       console.log(error);
+//       return {
+//         ok: false,
+//       };
+//     }
+//   };
+// }
+
+export function actUserUpdateProfileAsync(data, formData) {
+  console.log(data);
+  console.log(formData);
+  return async (dispatch) => {
+    try {
+      if (formData) {
+        const mediaResponse = await mediaService.upload(formData);
+        console.log(mediaResponse);
+
+        if (mediaResponse.status === 201) {
+          data.simple_local_avatar = { media_id: mediaResponse.data.id };
+        }
+      }
+
+      const response = await userService.updateProfile(data);
+      console.log(response);
+      dispatch(actUserFetchMe({ currentUser: response.data }));
+    } catch (error) {
+      console.log(error);
     }
   };
 }

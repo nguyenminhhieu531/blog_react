@@ -59,16 +59,16 @@ function HeaderMenus() {
               </a>
               <ul>
                 <li className="user">
-                  <Link to="/profile">Trang cá nhân</Link>
+                  <Link to="/dashboard/post">Dashboard</Link>
                 </li>
-                <li className="user">
+                {/* <li className="user">
                   <Link to="/change-password">Thay đổi mật khẩu</Link>
                 </li>
                 <li className="user">
                   <Link to="/logout" onClick={handleLogout}>
                     Đăng xuất
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </li>
           )}

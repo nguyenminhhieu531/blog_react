@@ -19,7 +19,7 @@ export default function ArticleItem({
     return <></>;
   }
 
-  const { thumb, title, pubDate, authorInfo, desc, categoryId, slug } = data;
+  const { thumb, title, pubDate, authorInfo, desc, categoryId, slug, view } = data;
 
   const classes = cls("article-item", {
     "style-card": isStyleCard,
@@ -31,7 +31,7 @@ export default function ArticleItem({
       <ArticleItemThumb thumb={thumb} />
       <div className="article-item__content">
         {isShowCategoies && <ArticleItemCategories categoryId={categoryId} />}
-        {isShowCategoies && <ArticleItemStats />}
+        {isShowCategoies && <ArticleItemStats view={view} />}
 
         <ArticleItemTitle title={title} slug={slug} />
 

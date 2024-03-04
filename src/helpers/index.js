@@ -8,6 +8,7 @@ export function mappingPostData(item) {
     pubDate: item.date,
     authorInfo: item.author_data,
     categoryId: item.categories,
+    view: item.view_count,
   };
 }
 

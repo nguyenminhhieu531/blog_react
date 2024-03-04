@@ -4,6 +4,7 @@ import "./popular-news-list.css";
 
 function ArticlePopular() {
   const posts = useSelector((state) => state.POST.postsPopular);
+  console.log(posts);
 
   return (
     <div className="popular-news section bg-white-blue">

@@ -1,9 +1,9 @@
-export default function ArticleItemStats() {
+export default function ArticleItemStats({ view }) {
   return (
     <ul className="article-item__stats">
       <li>
         <i className="icons ion-ios-eye"></i>
-        <span className="text">200</span>
+        <span className="text">{view}</span>
       </li>
     </ul>
   );

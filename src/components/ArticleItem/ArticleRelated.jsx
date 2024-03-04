@@ -4,7 +4,7 @@ import "./related-posts.css";
 function ArticleRelated(props) {
   const data = props.data;
   const { slug, title, pubDate, authorInfo } = data;
-  console.log(slug);
+  // console.log(slug);
   return (
     <article className="related-post__card">
       <Link to={`/post/${slug}`} className="related-post__title">
